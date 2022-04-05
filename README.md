@@ -1,3 +1,9 @@
+# E-commerce Project
+E-commerce app that allows customers to buy products online. They can use features like product search, add products to cart, and view orders.
+
+### Schema Builder
+<img src="https://user-images.githubusercontent.com/64141913/161838574-cc262975-608c-4ed5-8d5f-b0296d304101.jpg" width="100%">
+
 # Salesforce DX Project: Next Steps
 
 Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
