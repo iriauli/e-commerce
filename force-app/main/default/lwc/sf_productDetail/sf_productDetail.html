@@ -1,0 +1,81 @@
+<template>
+
+    <!-- Show Error Message -->
+    <template if:true={showSuccessMessage}>
+        <div class="slds-notify slds-notify_alert" role="alert">
+            <span class="slds-assistive-text">error</span>
+            <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small"
+                title="Description of icon when needed">
+            </span>
+            <h2>You successfully added {quantity} product to your shopping cart
+            </h2>
+            <div class="slds-notify__close">
+                <button onclick={closeSuccessMessage}
+                    class="slds-button slds-button_icon slds-button_icon-small slds-button_icon-inverse" title="Close">
+                    <svg class="slds-button__icon" aria-hidden="true">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+            </div>
+        </div>
+    </template>
+
+    <template if:true={showErrorMessage}>
+        <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">
+            <span class="slds-assistive-text">error</span>
+            <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small"
+                title="Description of icon when needed">
+                <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#error"></use>
+                </svg>
+            </span>
+            <h2>Sorry, you can't add current product more than 5 times to the cart.
+            </h2>
+            <div class="slds-notify__close">
+                <button onclick={closeErrorMessage}
+                    class="slds-button slds-button_icon slds-button_icon-small slds-button_icon-inverse" title="Close">
+                    <svg class="slds-button__icon" aria-hidden="true">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+            </div>
+        </div>
+    </template>
+
+    <div class="container">
+        <div class="detail">
+
+            <!-- Loader -->
+            <template if:true={loader} if:false={RecordIsUnavailable}>
+                <lightning-spinner alternative-text="Loading..." size="medium"></lightning-spinner>
+            </template>
+            <!-- Not Found -->
+            <template if:true={RecordIsUnavailable}>
+                <div class="not-found">
+                    Record is Unavailable
+                </div>
+            </template>
+            <!-- Product Detail -->
+            <template if:true={product} if:false={RecordIsUnavailable}>
+                <h1>{product.Name}</h1>
+                <p title={product.Description__c}>{product.Description__c}</p>
+                <div class="detail-footer">
+                    <p><span>Price: </span>
+                        <lightning-formatted-number title={product.Price__c} value={product.Price__c}
+                            format-style="currency" currency-code="USD"></lightning-formatted-number>
+                    </p>
+                    <div class="bottom-right">
+                        <div class="quantity">
+                            <p><span>Quantity: </span></p><input type="number" min="1" max="5" value={quantity}
+                                onchange={changeQuantity}></input>
+                        </div>
+                        <lightning-button data-id={product.Id} onclick={addToCart} label="Add to Cart"
+                            title="Add to Cart" class="slds-m-left_x-small"></lightning-button>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,60 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-24-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <template if:true={order}> 
+        <lightning-card> 
+            <div class="order">
+                <div class="order-details">
+                    <div class="order-details-item">Order : {name}</div>
+                    <div class="order-details-item">DeliveryStatus : {status}</div>
+                    <div class="order-details-item">Total Qty : {totalQty}</div>
+                    <div class="order-details-item">Total Price : <lightning-formatted-number value={totalPrice} format-style="currency" currency-code="USD"></lightning-formatted-number></div>
+                    <div class="order-details-item">
+                        <p>Shipping Address</p>
+                        <ul>
+                            <li>shippingStreet : {shippingStreet}</li>
+                            <li>shippingState : {shippingState}</li>
+                            <li>shippingCountry : {shippingCountry}</li>
+                            <li>shippingPostalCode : {shippingPostalCode}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </lightning-card>
+        <div class="content">
+            <template if:true={orderProducts}>
+                <template if:true={orderProducts.length}>
+                    <template for:each={orderProducts} for:item="product">
+                        <c-sf_order-product
+                            key={product.Id}
+                            product={product}
+                        ></c-sf_order-product>
+                    </template>
+                </template>
+                <template if:false={orderProducts.length}>
+                    <div class="slds-p-horizontal_medium">
+                        There are no products in order
+                    </div>
+                </template>
+            </template>
+            <template if:false={orderProducts}>
+                <div class="slds-p-horizontal_medium">
+                    There are no products in order
+                </div>
+            </template>
+            <template if:true={errors}>
+                <div class="slds-p-horizontal_medium">
+                    There was internal error
+                </div>
+            </template>
+        </div>
+    </template>
+    <template if:false={order}>
+        There is no order
+    </template>
+</template>

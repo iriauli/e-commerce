@@ -1,0 +1,25 @@
+<template>
+    <header>
+        <div class="left-side">
+            <img src="https://cdn-icons-png.flaticon.com/512/1495/1495635.png" alt="logo">
+            <h1 class ="header-title" onclick={navigateToHomePage}>Graphic Cards</h1>
+        </div>
+        <div class="right-side">
+            <div class="cart-box">
+                <div class="cart" onclick={navigateToViewCartPage}>
+                    <lightning-icon icon-name="utility:cart" alternative-text="cart" title="cart"></lightning-icon>
+                    <!-- <div class="quantity">{quantity}</div> -->
+                </div>
+            </div>
+            <div class="menu-box">
+                <lightning-icon icon-name="utility:user" alternative-text="User" title="User"></lightning-icon>
+                <lightning-button-menu alternative-text="Show menu">
+                    <lightning-menu-item value="AccountDetails" label="Account Details" onclick={navigateToAccountDetails}></lightning-menu-item>
+                    <lightning-menu-item value="Profile" label="Profile"></lightning-menu-item>
+                    <lightning-menu-item value="MyOrders" label="My Orders" onclick={navigateToMyOrders}></lightning-menu-item>
+                    <lightning-menu-item value="LogOut" label="Log Out"></lightning-menu-item>
+                </lightning-button-menu>
+            </div>
+        </div>
+    </header>
+</template>

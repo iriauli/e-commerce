@@ -1,0 +1,115 @@
+section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    padding: 0px 20px 20px 20px;
+}
+
+h1 {
+    font-weight: bold;
+    padding-bottom: 15px;
+}
+
+span {
+    font-weight: bold;
+}
+
+/***** CARD *****/
+.product-card {
+    padding: 15px;
+    border-radius: 0.5rem;
+    background-image: linear-gradient(to top left, #f2f3f4, white);
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+}
+
+.product-card h1 {
+    cursor: pointer;
+}
+
+.product-title:hover {
+    color: 00cc99;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px dotted rgba(0,0,0,0.2);
+    margin-top: 15px;
+}
+
+.cart-button {
+    display: inline-block;
+    border-radius: 0.5rem;
+    background-image: linear-gradient(to bottom right, #b1b8be, #7c8891);
+    border: none;
+    color: #ffffff;
+    text-align: center;
+    width: 120px;
+    transition: all 0.5s;
+    padding: 1px 10px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+    margin-bottom: 3px;
+}
+
+.cart-button:hover {
+    background-image: linear-gradient(to bottom right, #847182, #796878);
+    transition: 0.5s;
+}
+
+
+/***** SEARCH *****/
+lightning-input {
+    margin-top: -10px;
+}
+
+.search-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.search-input {
+    width: 40%;
+}
+
+/***** PAGINATION *****/
+.pag-parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    width: 800px;
+    background-image: linear-gradient(to top left, #fdfdfd, white);
+    border-radius: 0.5rem;
+}
+
+.pagination-display {
+    padding: 0px 50px;
+    color: #7c8891;
+}
+
+.slds-notify_alert {
+    border-radius: 0.5rem;
+    margin-bottom: 20px;
+    color: white;
+    background-color: green;
+}
+
+.slds-alert_error {
+    border-radius: 0.5rem;
+    margin-bottom: 20px;
+    background-color: #dc143c;
+}

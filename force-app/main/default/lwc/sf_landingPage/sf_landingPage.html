@@ -1,0 +1,108 @@
+<template>
+
+
+    <!-- Search Form -->
+    <section class="search-section">
+        <lightning-input type="text" placeholder="Type to search products..." class="search-input" value={key}
+            onchange={updateKey}></lightning-input>
+        <lightning-button label="Search" onclick={handleSearch} variant="brand"></lightning-button>
+    </section>
+    <!-- Loader -->
+    <template if:true={loader}>
+        <lightning-spinner alternative-text="Loading..." size="medium"></lightning-spinner>
+    </template>
+    <!-- Show Error Message -->
+    <template if:true={showSuccessMessage}>
+        <div class="slds-notify slds-notify_alert" role="alert">
+            <span class="slds-assistive-text">error</span>
+            <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small"
+                title="Description of icon when needed">
+            </span>
+            <h2>You successfully added {quantity} product to your shopping cart
+            </h2>
+            <div class="slds-notify__close">
+                <button onclick={closeSuccessMessage}
+                    class="slds-button slds-button_icon slds-button_icon-small slds-button_icon-inverse" title="Close">
+                    <svg class="slds-button__icon" aria-hidden="true">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+            </div>
+        </div>
+    </template>
+
+    <template if:true={showErrorMessage}>
+        <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">
+            <span class="slds-assistive-text">error</span>
+            <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small"
+                title="Description of icon when needed">
+                <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#error"></use>
+                </svg>
+            </span>
+            <h2>Sorry, you can't add current product more than 5 times to the cart.
+            </h2>
+            <div class="slds-notify__close">
+                <button onclick={closeErrorMessage}
+                    class="slds-button slds-button_icon slds-button_icon-small slds-button_icon-inverse" title="Close">
+                    <svg class="slds-button__icon" aria-hidden="true">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+            </div>
+        </div>
+    </template>
+    <!-- Product Space -->
+    <div class="slds-box slds-theme_default">
+        <section class="product-list">
+            <template if:true={products}>
+                <template for:each={products} for:item="product">
+                    <div class="product-card" key={product.Id}>
+                        <h1 data-id={product.Id} title={product.Name} onclick={navigateToProductPage}>{product.Name}
+                        </h1>
+                        <p title={product.Description__c}>{product.Description__c}</p>
+                        <div class="card-footer">
+                            <p><span>Price: </span>
+                                <lightning-formatted-number title={product.Price__c} value={product.Price__c}
+                                    format-style="currency" currency-code="USD"></lightning-formatted-number>
+                            </p>
+                            <div class="card-details">
+                                <button data-id={product.Id} onclick={addToCart} class="cart-button">Add to
+                                    Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </template>
+        </section>
+        <!-- Not Found -->
+        <template if:true={RecordIsUnavailable}>
+            <div class="slds-align_absolute-center">
+                No records found...
+                <br />
+            </div>
+        </template>
+        <!-- Pagination -->
+        <template if:false={RecordIsUnavailable}>
+            <div class="pag-parent">
+                <div class="pagination">
+                    <div class="slds-p-right_xx-small">
+                        <!-- Previous Button -->
+                        <lightning-button label="Previous" disabled={isPrev} onclick={handlePrev}
+                            icon-name="utility:chevronleft" name="prev"></lightning-button>
+                    </div>
+                    <div class="pagination-display">
+                        Products {recordStart}-{recordEnd} of {totalRecords} | Page {pageNumber} of {totalPages}
+                    </div>
+                    <div class="slds-p-left_xx-small">
+                        <!-- Next Button -->
+                        <lightning-button label="Next" disabled={isNext} onclick={handleNext}
+                            icon-name="utility:chevronright" icon-position="right" name="next"></lightning-button>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>
